@@ -18,8 +18,16 @@ const app = express()
 const PORT = process.env.PORT || 3001
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173'
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://garimpei-gamma.vercel.app'
+]
+
 app.use(cors({
-  origin: FRONTEND_URL,
+  origin: (origin, callback) => {
+    const allowed = allowedOrigins.includes(origin || '')
+    callback(null, allowed)
+  },
   credentials: true
 }))
 app.use(express.json())

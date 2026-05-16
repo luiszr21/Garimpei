@@ -7,6 +7,7 @@ import produtoRoutes from './routes/produto.routes'
 import categoriaRoutes from './routes/categoria.routes'
 import propostaRoutes from './routes/proposta.routes'
 import adminRoutes from './routes/admin.routes'
+import { info } from './lib/logger'
 
 
 
@@ -32,9 +33,9 @@ app.use('/propostas', propostaRoutes)
 app.use('/admin', adminRoutes)
 
 app.get('/', (req, res) => {
-  res.json({ message: 'API Loja de Roupas funcionando! 👗' })
+  res.json({ message: 'API funcionando!' })
 })
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`)
+  info(`Servidor rodando na porta ${PORT}`)
 })

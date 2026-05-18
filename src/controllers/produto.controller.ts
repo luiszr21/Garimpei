@@ -116,8 +116,8 @@ export const cadastrarProduto = async (req: Request, res: Response) => {
   } catch (err) {
     error('Erro ao cadastrar produto:', err)
 
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === 'P2003') {
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === 'P2003') {
         return res.status(400).json({ erro: 'Categoria inválida para este produto' })
       }
     }
@@ -156,12 +156,12 @@ export const editarProduto = async (req: Request, res: Response) => {
   } catch (err) {
     error('Erro ao editar produto:', err)
 
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === 'P2025') {
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === 'P2025') {
         return res.status(404).json({ erro: 'Produto não encontrado' })
       }
 
-      if (error.code === 'P2003') {
+      if (err.code === 'P2003') {
         return res.status(400).json({ erro: 'Categoria inválida para este produto' })
       }
     }
@@ -179,7 +179,7 @@ export const removerProduto = async (req: Request, res: Response) => {
   } catch (err) {
     error('Erro ao remover produto:', err)
 
-    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
       return res.status(404).json({ erro: 'Produto não encontrado' })
     }
 

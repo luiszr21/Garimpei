@@ -27,7 +27,7 @@ export const cadastrarCategoria = async (req: Request, res: Response) => {
   } catch (err) {
     error('Erro ao cadastrar categoria:', err)
 
-    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
       return res.status(409).json({ erro: 'Categoria já cadastrada' })
     }
 
@@ -44,12 +44,12 @@ export const removerCategoria = async (req: Request, res: Response) => {
   } catch (err) {
     error('Erro ao remover categoria:', err)
 
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === 'P2025') {
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === 'P2025') {
         return res.status(404).json({ erro: 'Categoria não encontrada' })
       }
 
-      if (error.code === 'P2003') {
+      if (err.code === 'P2003') {
         return res.status(409).json({ erro: 'Não é possível remover categoria com produtos vinculados' })
       }
     }

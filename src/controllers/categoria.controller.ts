@@ -40,7 +40,7 @@ export const removerCategoria = async (req: Request, res: Response) => {
     const id = req.params.id as string
 
     await prisma.categoria.delete({ where: { id } })
-    return res.json({ mensagem: 'Categoria removida com sucesso' })
+    return res.json({ mensagem: 'Categoria removida' })
   } catch (err) {
     error('Erro ao remover categoria:', err)
 
